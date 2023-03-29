@@ -4,15 +4,13 @@
 //    (See accompanying file LICENSE_1_0.txt or copy at
 //        http://www.boost.org/LICENSE_1_0.txt)
 
-#include <boost/context/detail/fcontext.hpp>
+// Modified to match the Nova-Context project structure
+#include "include/nova/context/fcontext.h"
 
-using boost::context::detail::fcontext_t;
-using boost::context::detail::transfer_t;
-
-// This C++ tail of ontop_fcontext() allocates transfer_t{ from, vp }
-// on the stack.  If fn() throws a C++ exception, then the C++ runtime
-// must remove this tail's stack frame.
-extern "C" transfer_t
-ontop_fcontext_tail( int ignore, void * vp, transfer_t (* fn)(transfer_t), fcontext_t const from) {
-    return fn( transfer_t{ from, vp });
+// This C++ tail of ontop_fcontext() allocates fcontext_transfer_t{ from, vp } on the stack. If fn() throws a
+// C++ exception, then the C++ runtime must remove this tail's stack frame.
+extern "C" fcontext_transfer_t
+ontop_fcontext_tail(int ignore, void *vp, fcontext_transfer_t (*fn)(fcontext_transfer_t), fcontext_t const from)
+{
+    return fn(fcontext_transfer_t{ from, vp });
 }
