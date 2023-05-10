@@ -8,7 +8,7 @@
 #define NOVA_CONTEXT_CONFIG_H
 
 #ifndef NOVA_CONTEXT_STATIC
- #ifdef NOVA_CONTEXT_SOURCE
+ #ifdef nova_context_EXPORTS
   #if defined(_MSC_VER) || defined(__MINGW32__)
    #define NOVA_CONTEXT_API __declspec(dllexport)
   #else
